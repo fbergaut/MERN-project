@@ -85,6 +85,8 @@ module.exports.deletePost = (req, res) => {
     });
 };
 
+// likes - unlikes
+
 module.exports.likePost = async(req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id);
@@ -138,6 +140,8 @@ module.exports.unlikePost = async(req, res) => {
         return res.status(400).send(err);
     }
 };
+
+// comments
 
 module.exports.commentPost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
