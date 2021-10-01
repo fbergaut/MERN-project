@@ -60,7 +60,7 @@ module.exports.follow = async(req, res) => {
             req.params.id, { $addToSet: { following: req.body.idToFollow } }, { new: true, upsert: true },
             (err, docs) => {
                 if (!err) res.status(201).json(docs);
-                else return resstatus(400).json(err);
+                else return res.status(400).json(err);
             }
         );
         // add to following list
@@ -68,7 +68,7 @@ module.exports.follow = async(req, res) => {
             req.body.idToFollow, { $addToSet: { followers: req.params.id } },
             (err, docs) => {
                 // if (!err) res.status(201).json(docs);
-                if (err) return resstatus(400).json(err);
+                if (err) return res.status(400).json(err);
             }
         );
     } catch {
@@ -86,7 +86,7 @@ module.exports.unfollow = async(req, res) => {
             req.params.id, { $pull: { following: req.body.idToUnfollow } }, { new: true, upsert: true },
             (err, docs) => {
                 if (!err) res.status(201).json(docs);
-                else return resstatus(400).json(err);
+                else return res.status(400).json(err);
             }
         );
         // remove from following list
@@ -94,7 +94,7 @@ module.exports.unfollow = async(req, res) => {
             req.body.idToUnfollow, { $pull: { followers: req.params.id } },
             (err, docs) => {
                 // if (!err) res.status(201).json(docs);
-                if (err) return resstatus(400).json(err);
+                if (err) return res.status(400).json(err);
             }
         );
     } catch {
